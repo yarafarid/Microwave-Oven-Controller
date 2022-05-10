@@ -1,0 +1,11 @@
+void PORT_Int(unsigned char potrName);
+void DIO_vSETbit_DIR(unsigned char portName,unsigned char pinNO,unsigned char diraction);
+void DIO_vWritebit_DATA(unsigned char portName,unsigned char pinNO,unsigned char data);
+void DIO_vTOGbit(unsigned char portName,unsigned char pinNO);
+void DIO_vSETpotr_DIR(unsigned char portName,unsigned char diraction);
+void DIO_vWriteport_DATA(unsigned char portName,unsigned char data);
+unsigned char DIO_u8Readbit_DATA(unsigned char portName,unsigned char pinNO);
+unsigned char DIO_u8Readport_DATA(unsigned char portName );
+void DIO_vEnablePullup(unsigned char portName,unsigned char pinNO);
+void DIO_vWriteHighLlevel(unsigned char portName,unsigned char data);
+void DIO_vWriteLowlevel(unsigned char portName,unsigned char data);
