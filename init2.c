@@ -225,6 +225,7 @@ unsigned char GPIO_ReadPin(unsigned char PortName, unsigned char PinNumber){
 			return ( READ_BIT( GPIO_PORTF_DATA_R , PinNumber ) );
 		}
 	}
+	return 0;
 }
 void GPIO_PullUp(unsigned char PortName, unsigned char PinNumber){
 	switch(PortName){
