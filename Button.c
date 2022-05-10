@@ -19,4 +19,4 @@ void Button_vInit_PUll_UP(unsigned char portName , unsigned char pinNo){
 	DIO_vEnablePullup(portName,  pinNo) ;
 	PORT_Init(portname) ;  // OR INTIALIZE ALL PORTS AS DIGITAL IN MAIN
 	DIO_vSETbit_DIR(portName, pinNo , 0); // DIR = 0 , SINCE BUTTON IS INPUT
-}
+
