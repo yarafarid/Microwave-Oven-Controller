@@ -18,8 +18,7 @@ void GPIO_PinDirection (unsigned char PortName, unsigned char PinNumber, unsigne
 				CLEAR_BIT (GPIO_PORTA_DIR_R, PinNumber)
 			}
 			break;
-		}
-		
+		}		
 		case 'B':
 		case 'b':
 		{
@@ -32,8 +31,7 @@ void GPIO_PinDirection (unsigned char PortName, unsigned char PinNumber, unsigne
 				CLEAR_BIT (GPIO_PORTB_DIR_R, PinNumber)
 			}
 			break;
-		}
-		
+		}		
 		case 'C':
 		case 'c':
 		{
@@ -46,8 +44,7 @@ void GPIO_PinDirection (unsigned char PortName, unsigned char PinNumber, unsigne
 				CLEAR_BIT (GPIO_PORTC_DIR_R, PinNumber)
 			}
 			break;
-		}
-		
+		}		
 		case 'D':
 		case 'd':
 		{
@@ -60,8 +57,7 @@ void GPIO_PinDirection (unsigned char PortName, unsigned char PinNumber, unsigne
 				CLEAR_BIT (GPIO_PORTD_DIR_R, PinNumber)
 			}
 			break;
-		}
-	
+		}	
 		case 'E':
 		case 'e':
 		{
@@ -74,8 +70,7 @@ void GPIO_PinDirection (unsigned char PortName, unsigned char PinNumber, unsigne
 				CLEAR_BIT (GPIO_PORTE_DIR_R, PinNumber)
 			}
 			break;
-		}
-		
+		}		
 		case 'F':
 		case 'f':
 		{
@@ -88,8 +83,7 @@ void GPIO_PinDirection (unsigned char PortName, unsigned char PinNumber, unsigne
 				CLEAR_BIT (GPIO_PORTF_DIR_R, PinNumber)
 			}
 			break;
-		}
-			
+		}	
 	}
 }
 
@@ -102,36 +96,31 @@ void GPIO_PinToggle (unsigned char PortName, unsigned char PinNumber)
 		{
 			TOG_BIT (GPIO_PORTA_DATA_R, PinNumber)
 			break;
-		}
-		
+		}	
 		case 'B':
 		case 'b':
 		{
 			TOG_BIT (GPIO_PORTB_DATA_R, PinNumber)
 			break;
-		}
-		
+		}	
 		case 'C':
 		case 'c':
 		{
 			TOG_BIT (GPIO_PORTC_DATA_R, PinNumber)
 			break;
-		}
-		
+		}	
 		case 'D':
 		case 'd':
 		{
 			TOG_BIT (GPIO_PORTD_DATA_R, PinNumber)
 			break;
-		}
-		
+		}		
 		case 'E':
 		case 'e':
 		{
 			TOG_BIT (GPIO_PORTE_DATA_R, PinNumber)
 			break;
-		}
-		
+		}	
 		case 'F':
 		case 'f':
 		{
@@ -151,35 +140,30 @@ void Port_Write (unsigned char PortName, unsigned char Data)
 			GPIO_PORTA_DATA_R = Data;
 			break;
 		}
-		
 		case 'B':
 		case 'b':
 		{
 			GPIO_PORTB_DATA_R = Data;
 			break;
-		}
-		
+		}		
 		case 'C':
 		case 'c':
 		{
 			GPIO_PORTC_DATA_R = Data;
 			break;
-		}
-		
+		}		
 		case 'D':
 		case 'd':
 		{
 			GPIO_PORTC_DATA_R = Data;
 			break;
-		}
-		
+		}	
 		case 'E':
 		case 'e':
 		{
 			GPIO_PORTE_DATA_R = Data;
 			break;
-		}
-		
+		}		
 		case 'F':
 		case 'f':
 		{
@@ -196,43 +180,32 @@ unsigned char Port_Read (unsigned char PortName)
 		case 'A':
 		case 'a':
 		{
-			return GPIO_PORTA_DATA_R;
-		
-		}
-    
+			return GPIO_PORTA_DATA_R;		
+		}    
 		case 'B':
 		case 'b':
 		{
-			return GPIO_PORTB_DATA_R;
-			
-		}
-		
+			return GPIO_PORTB_DATA_R;			
+		}		
 		case 'C':
 		case 'c':
 		{
 			return GPIO_PORTC_DATA_R;
-		
-		}
-		
+		}		
 		case 'D':
 		case 'd':
 		{
-			return GPIO_PORTD_DATA_R;
-			
-		}
-		
+			return GPIO_PORTD_DATA_R;	
+		}	
 		case 'E':
 		case 'e':
 		{
-			return GPIO_PORTE_DATA_R;
-		
-		}
-		
+			return GPIO_PORTE_DATA_R;	
+		}		
 		case 'F':
 		case 'f':
 		{
-			return GPIO_PORTF_DATA_R;
-			
+			return GPIO_PORTF_DATA_R;	
 		}
 	}
 	return 0;
