@@ -1,2 +1,2 @@
-void keypad_vInit (unsigned char portName);
-unsigned char keypad_u8Read(unsigned char portName);
+void keypad_Init (unsigned char portName);
+unsigned char keypad_Read(unsigned char portName);
