@@ -35,7 +35,7 @@ void ForceCursor(unsigned char row,unsigned char col);
 
 
 
-//	==============for testing================
+
 
 	
 void LCD_init()
