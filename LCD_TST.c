@@ -101,18 +101,24 @@ void sendChar(unsigned char ch)
 	
 }
 
-void delay_inMilli(int n){
-int i,j;
-for(i=0;i<n;i++)
-for(j=0;j<3180;j++)
-{}
+void SysTick_Wait(unsigned int delay){
+		NVIC_ST_CTRL_R = 0;
+		NVIC_ST_RELOAD_R = delay - 1;
+		NVIC_ST_CURRENT_R = 0;
+		NVIC_ST_CTRL_R = 0x00000005;
+		while((NVIC_ST_CTRL_R & 0x00010000)==0){}
 }
- 
-void delay_inMicro(int n){
-int i,j;
-for(i=0;i<n;i++)
-for(j=0;j<3;j++)
-{}
+void delay_inMilli(unsigned int delay){
+		unsigned int i;
+		for(i = 0;i<delay;i++){
+			SysTick_Wait(80000/5);
+		}
+}
+void delay_inMicro(unsigned int delay){
+		unsigned int i;
+		for(i = 0;i<delay;i++){
+			SysTick_Wait(16);
+		}
 }
 void LCD_PrintString(char *String)
 {
