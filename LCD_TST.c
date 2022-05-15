@@ -36,6 +36,12 @@ void SystemInit(){}
 
 //	==============for testing================
 int main(){
+	//LCD initialization
+        GPIO_Init('A');
+	GPIO_Init('B');
+	GPIO_PinDirection ('A', 7, 1);// RS
+	GPIO_PinDirection ('A', 6, 1);//E
+        Port_Direction('B', 0XFF);
 LCD_init();
 while(1)
 {
@@ -54,49 +60,37 @@ delay_inMilli(500);
 	
 void LCD_init()
 {
-  GPIO_Init('A');
-	GPIO_Init('E');
-	GPIO_PinDirection ('E', 1, 1);//data port
-	GPIO_PinDirection ('E', 2, 1);//data port
-	GPIO_PinDirection ('E', 4, 1);// RS
-	GPIO_PinDirection ('E', 5, 1);//E
-  Port_Direction('A', 0XFF);
-	
-	
+
 	//LCD
-	delay_inMilli(20); //let lcd to be on
+	delay_inMilli(30);//let lcd to be on
+	delay_inMicro(2000);
 	LCD_Cmd(0x38); //8-bits,2 display lines
-		delay_inMilli(2);
-	LCD_Cmd(0x01); //clr display
-		delay_inMilli(10);
-	LCD_Cmd(0x0C); //cursor off
-		delay_inMilli(2);
+		delay_inMilli(1);
+	LCD_Cmd(0x0E); //clr display
+		delay_inMilli(15);
+	LCD_Cmd(0x02); //cursor off
+		delay_inMilli(15);
 	LCD_Cmd(0x06); //entry mode
 		delay_inMilli(2);
-	
 }
  
 void LCD_Cmd(unsigned char command)
 {
 
-	Port_Write ('A',command );
-	GPIO_PinData('E', 1, command);//PIN E1
-	GPIO_PinData('E', 2, command);//PIN E2
-	GPIO_PinData('E', 4, 0);// RS=0
+Port_Write ('B',command );
+	GPIO_PinData('A', 7, 0);// RS=0
 	CREATEpulse();
-	delay_inMilli(2);
+	delay_inMilli(5);
 
 } 
 
 void sendChar(unsigned char ch)
 {
 
-	Port_Write ('A',ch);
-	GPIO_PinData('E', 1, ch);//PIN E1
-	GPIO_PinData('E', 2, ch);//PIN E2
-	GPIO_PinData('E', 4, 1);// RS=1
+	Port_Write ('B',ch);
+	GPIO_PinData('A', 7, 1);// RS=1
 	CREATEpulse();
-	delay_inMilli(2);
+	delay_inMilli(5);
 	
 	
 }
@@ -137,9 +131,9 @@ delay_inMilli(700);
 }
 
 static void CREATEpulse (void){
-GPIO_PinData('E', 5, 1);
+GPIO_PinData('A', 6, 1);
 delay_inMilli(3);
-GPIO_PinData('E', 5, 0);
+GPIO_PinData('A', 6, 0);
 delay_inMilli(3);
 }
 void ClearLcd(void){
