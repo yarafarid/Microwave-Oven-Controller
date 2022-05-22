@@ -4,7 +4,9 @@
 #include "stdio.h"
 #include "keypad.h"
 #include "Button.h"
-#include "LedsBlink.h"
+#include "LedBlinking.h"
+#include "LedBlinking.h"
+#include "LedBlinking_withbuzzer.h"
 #include "EXTERNAL_SWITCH.h"
 #include "Initialization1.h"
 #include "init2.h"
@@ -14,7 +16,7 @@ void count_down(int time)
  {	
 	 unsigned char cook_time,pause_flag = 0;
 	 unsigned char Time_At_Pause  = 0;
-   int i  ;
+         int i  ;
 	 char t[100];
 	 for(i = time ; i>0; i--)
 	 {
@@ -32,52 +34,52 @@ void count_down(int time)
 							 
 							 while(!(Button_Read('F',4)== 0 && (pause_flag ==1)) || (Door_Status()== 1)) 
 												
-												{
-													LedBlinking();
-													if (Button_Read('F',0)== 0 ){ 
-													ClearLcd();
-													delay_inMilli(1000);
-													count_down(Time_At_Pause) ;
+								{
+									LedBlinking();
+									if (Button_Read('F',0)== 0 ){ 
+									ClearLcd();
+									delay_inMilli(1000);
+									count_down(Time_At_Pause) ;
 													
-												 }
-													else if(!(Button_Read('F',0)== 0 ) && (Door_Status()== 1) ){
-														ClearLcd();
-														delay_inMilli(1000);
-													  count_down(Time_At_Pause) ;
-													}
+								         }
+									else if(!(Button_Read('F',0)== 0 ) && (Door_Status()== 1) ){
+									ClearLcd();
+									delay_inMilli(1000);
+									 count_down(Time_At_Pause) ;
+									}
 							
-					}
+					                         }
 							SW1Pressed +=1;					
 							break; 
 						 }
 			
-			LedOn();
-	    sprintf(t,"%d",i);
-			LCD_PrintString(t);
-		  delay_inMilli(1000);
-		  ClearLcd();
+			                        LedOn();
+	                                       sprintf(t,"%d",i);
+			                      LCD_PrintString(t);
+		                              delay_inMilli(1000);
+		                              ClearLcd();
  }
 	 
 	 
  
-	if (Button_Read('F',4)== 0 && (pause_flag ==1)) { // sw1 -> second time sw1
+	if (Button_Read('F',4)== 0 && (pause_flag ==1)) { // sw1 -> second time 
 			         
 				
-								ClearLcd();
-								LCD_PrintString("cooking stopped");
+	    ClearLcd();
+	    LCD_PrintString("cooking stopped");
 		            //ideal state
-								while(!(Button_Read('F',0)== 0 && (pause_flag ==1) && (Door_Status()==1)))
-								{	
-								LedBlinking();
-								}
+	  while(!(Button_Read('F',0)== 0 && (pause_flag ==1) && (Door_Status()==1)))
+		{	
+		   LedBlinking();
 		}
+	}
 	   if (Button_Read('F',0)== 0 && (Door_Status()==0)) {
-								 // back to main
-								 // switch_function() ;
-							 }
+			 // back to main
+			 // switch_function() ;
+		 }
 	
 	LedOff();
 	delay_inMilli(1000);
-  LedBlinking_withbuzzer();	
+        LedBlinking_withbuzzer();	
 		
   }
