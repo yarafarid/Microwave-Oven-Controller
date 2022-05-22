@@ -12,15 +12,15 @@
 
 int main(){
 		//LCD initialization
-  GPIO_Init('A');
+        GPIO_Init('A');
 	GPIO_Init('B');
 	GPIO_PinDirection ('A', 7, 1);// RS
 	GPIO_PinDirection ('A', 6, 1);//E
-  Port_Direction('B', 0XFF);
+        Port_Direction('B', 0XFF);
 	LCD_init();
 		//keypad initialization  
-		RowKeypad_Init();
-	  ColKeypad_Init();
+   	RowKeypad_Init();
+	ColKeypad_Init();
 
 		
 			while(1){
