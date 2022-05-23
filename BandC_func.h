@@ -1,0 +1,1 @@
+void BeefOrChicken(unsigned char cook);
