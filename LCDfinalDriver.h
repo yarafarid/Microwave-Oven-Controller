@@ -1,7 +1,7 @@
 void LCD_init(void);
 void LCD_Cmd(unsigned char command);
 void LCD_PrintString(char *String);
-void readyToPrint(void);// must call it before print 
+void readyToPrint(void);
 static void CREATEpulse (void);// give pulse after any print command
 void sendChar(unsigned char ch);	
 void ClearLcd(void);
