@@ -85,6 +85,13 @@
 				 error_check++;
 				}
 	 if(error_check == 0){
+		 while(!(Button_Read('F',0)==0))    										
+		 {
+				LCD_PrintString("Press Start");
+				delay_inMilli(2000);
+				ClearLcd();
+		 }
+	 }
 
 	 count_down(time);
 	 LCD_PrintString("End of cooking");
