@@ -12,93 +12,113 @@
 #include "init2.h"
 #include "delaySys.h"
 
-void count_down(int totalTime)
+void count_down(int time)
  {	
-	 int sec = totalTime%60;
-	 int min = totalTime/60;
-       	int totalTimePause = 0;
-	 int SW1Pressed = 0;
-	 int minAtPause = 0;
-	 int sec_At_Pause  = 0;
-	
+	 int sec = time%60;
+	 int min = time/60;
+      	 int Time_At_Pause  = 0;
+	 int min1 ;
+	 int min2 ;
+	 int sec1 ;
+	 int sec2 ;
 	 unsigned char pause_flag = 0;
-	 
-         int i = sec ;
-	 char t_m[100] , t_s[100];
-	for(;min >= 0 ; min--){
-	 for( ; i>0; i--)
-	 {
-		 LCD_PrintString("counting : ");
-						 if((Button_Read('F',4)==0 && (pause_flag == 0) )|| (Door_Status()== 1))//sw1 pressed for the first time)
+         int i = 0 ;
+	 int Door_check = 0;
+	 int check = 0;
+	 for(i = time ; i>=0; i--)
+	 {		char min1 = min/10;
+			char min2 = min%10;
+			char sec1 = sec/10;
+			char sec2 = sec%10;
+			LCD_PrintString("counting : ");
+			  if(min >= 0){
+				sendChar(min1 + '0');
+				sendChar(min2 + '0');
+			   }
+				sendChar(':');
+	  		  if(sec >= 0){
+				sendChar(sec1 + '0');
+				sendChar(sec2 + '0');
+			   }
+						 if((Button_Read('F',4)==0 && (pause_flag == 0))
 						 {
 							 ClearLcd();
-							 sec_At_Pause = i+1;
-                                                         minAtPause = min;
-							 totalTimePause = (minAtPause*60) + (sec_At_Pause);
+							 Time_At_Pause = i+1 ;                                                        
 							 pause_flag = 1 ;
-							 LCD_PrintString("first step");
+							 LCD_PrintString("cooking paused");
 							 delay_inMilli(2000);
 							 ClearLcd();
-							 sprintf(t_m,"%d",minAtPause);
-							 LCD_PrintString(t_m);
-					
+							 LCD_PrintString("Time : ");
+							 sendChar(min1 + '0');
+							 sendChar(min2 + '0');
 							 sendChar(':');
-							 sprintf(t_s,"%d",i+1);
-							 LCD_PrintString(t_s);
+							 sendChar(sec1 + '0');
+							 sendChar((++sec2) + '0');
 							 
-							 
-							 while(!(Button_Read('F',4)== 0 && (pause_flag ==1)) || (Door_Status()== 1)) 
+							 while(!(Button_Read('F',4)== 0 && (pause_flag ==1)) 
 												
 								{
 									LedBlinking();
-									if (Button_Read('F',0)== 0 ){ 
+									if (Button_Read('F',0)== 0 )
+									{ 
 									ClearLcd();
-									delay_inMilli(1000);
-									count_down(totalTimePause) ;
-										break ;			
-								         }
-									else if(!(Button_Read('F',0)== 0 ) && (Door_Status()== 1) ){
-									ClearLcd();
-									delay_inMilli(1000);
-									 count_down(totalTimePause) ;
-										
+									delay_inMilli(500);
+									count_down(Time_At_Pause);
+									check++;
+									break ;			
+								         }		
 								}
-							
-					                         }
-							SW1Pressed +=1;					
-							break; 
-						 }
-			
-			                        LedOn();
-	                                       sprintf(t_m,"%d",min);
-						LCD_PrintString(t_m);
-						 sendChar(':');
-						 sprintf(t_s,"%d",i);
-						 LCD_PrintString(t_s);
-			
-		                              delay_inMilli(1000);
-		                              ClearLcd();
+							       break;
+					                }
+							 if((Door_Status()== 1))
+							 {
+								 ClearLcd();
+								 Time_At_Pause = i+1 ;
+								 pause_flag = 1 ;
+								 LCD_PrintString("Door is open");
+								 delay_inMilli(1000);
+								 ClearLcd();
+								 LCD_PrintString("Time : ");
+								 sendChar(min1 + '0');
+								 sendChar(min2 + '0');
+								 sendChar(':');
+								 sendChar(sec1 + '0');
+								 sendChar((++sec2) + '0');
+							while((Door_Status()== 1))             
+							{	
+								LedBlinking();
+							}
+							ClearLcd();
+							LCD_PrintString("Door is closed");
+							delay_inMilli(1000);
+							ClearLcd();
+							delay_inMilli(500);
+							count_down(Time_At_Pause) ;
+							check++;
+							break;
+							}
+		       if(sec >= 0){
+			  sec-- ;
+			}
+			if(sec == -1){
+			   min--;
+			   sec =59;
+			}
+			LedOn();
+		        delay_inMilli(1000);
+		        ClearLcd();
  }
-		if(i == 0){
-		sec = 59 ;
-		i = sec ;	
-		}
-	else if (SW1Pressed == 1){
-	 break;
-	 }
-	}
-	 
-	 
- 
-	if (Button_Read('F',4)== 0 && (pause_flag ==1)) { // sw1 -> second time 
-			         
-				
+	if (Button_Read('F',4)== 0 && (pause_flag ==1)) { // sw1 -> second time 		
 	    ClearLcd();
-	    LCD_PrintString("cooking stopped");		            
+	    LCD_PrintString("cooking stopped");	
+	    delay_inMilli(2000);
+	    ClearLcd();
 	}
 	
-	LedOff();
-	delay_inMilli(1000);
-        LedBlinking_withbuzzer();	
-		
+if(check == 0){
+			LedOff();
+			delay_inMilli(1000);
+			LedBlinking_withbuzzer();	
+	}
   }
+
