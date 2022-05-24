@@ -1,3 +1,3 @@
-unsigned char valid(short Time) ;
+unsigned char valid(int Time , int T2) ;
 void D_Init() ;
-short D_pressed() ;
+void D_pressed() ;
