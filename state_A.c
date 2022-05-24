@@ -16,15 +16,12 @@ void Popcorn(void){
 	LCD_PrintString ("Popcorn");
 	delay_inMilli(2000);
 	ClearLcd();
-	while(1)
+        while(!(Button_Read('F',0)==0))
 		 {
 				LCD_PrintString("Press Start");
 				delay_inMilli(2000);
-			  ClearLcd();
-				if (Button_Read('F',0)==0) {
-				break ;
-		 }
-	 }
+			         ClearLcd();
+	         }
 	
 	while (Door_Status() == 1){
 				LCD_PrintString ("Door is Open");
