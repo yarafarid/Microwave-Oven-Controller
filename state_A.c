@@ -25,6 +25,19 @@ void Popcorn(void){
 				break ;
 		 }
 	 }
+	
+	while (Door_Status() == 1){
+				LCD_PrintString ("Door is Open");
+				delay_inMilli(1000);
+					ClearLcd();
+			 DoorCheck +=1;
+		 }	
+		 if(DoorCheck !=0 ){
+				LCD_PrintString("Door is closed");
+				delay_inMilli(1000);
+				ClearLcd(); 
+		 }
+	
 	count_down(time);
 	LCD_PrintString("End of cooking");
 	delay_inMilli(2000);
